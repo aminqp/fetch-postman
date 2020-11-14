@@ -1,0 +1,181 @@
+{
+    "env": {
+        "browser": true,
+        "es6": true,
+        "jest": true
+    },
+    "parser": "babel-eslint",
+    "extends": ["airbnb", "airbnb/hooks"],
+    "plugins": [
+        "react",
+        "jsx-a11y",
+        "prettier",
+        "simple-import-sort",
+        "import",
+        "sort-keys-fix"
+    ],
+    "parserOptions": {
+        "sourceType": "module",
+        "allowImportExportEverywhere": true,
+        "jsx-a11y/anchor-is-valid": 0
+    },
+    "globals": {
+        "document": true,
+        "window": true
+    },
+    "rules": {
+        "sort-keys": ["error", "asc", {"caseSensitive": true, "natural": false, "minKeys": 2}],
+        "sort-keys-fix/sort-keys-fix": "warn",
+        "simple-import-sort/sort": "error",
+        "sort-imports": ["error", {
+            "ignoreCase": true,
+            "ignoreDeclarationSort": true,
+            "ignoreMemberSort": true
+        }],
+        "jsx-a11y/anchor-is-valid": [ 1, {
+            "components": [ "Link" ],
+            "specialLink": [ "hrefLeft", "hrefRight" ],
+            "aspects": [ "noHref", "invalidHref", "preferButton" ]
+        }],
+        "import/first": "error",
+        "import/newline-after-import": "error",
+        "import/no-duplicates": "error",
+
+        "comma-dangle": [1, {
+            "arrays": "never",
+            "objects": "never",
+            "imports": "never",
+            "exports": "never",
+            "functions": "never"
+        }],
+        "indent": [
+            "error",
+            2,
+            {
+                "SwitchCase": 1
+            }
+        ],
+        "camelcase": [
+            0,
+            {
+                "properties": "never"
+            }
+        ],
+        "no-unused-vars": [
+            1,
+            {
+                "vars": "all",
+                "args": "none",
+                "ignoreRestSiblings": true
+            }
+        ],
+        "max-len": [
+            2,
+            150,
+            4,
+            {
+                "ignoreUrls": true,
+                "ignoreComments": true,
+                "ignoreRegExpLiterals": true
+            }
+        ],
+        "valid-typeof": 1,
+        "react/no-unused-state": 1,
+        "react/no-deprecated": 1,
+        "react/state-in-constructor": 1,
+        "no-underscore-dangle": 1,
+        "class-methods-use-this": 1,
+        "react/jsx-indent": ["error", 2],
+        "react/jsx-indent-props": ["error", 2],
+        "react/jsx-one-expression-per-line": [ 0 , { "allow":"single-child" }],
+        "react/jsx-props-no-spreading": [
+            "off", {
+                "html": "ignore",
+                "custom": "ignore",
+                "exceptions": []
+            }],
+        "react/jsx-filename-extension": [
+            1,
+            {
+                "extensions": [
+                    ".js",
+                    ".jsx"
+                ]
+            }
+        ],
+        "react/forbid-prop-types": [
+            "error",
+            {
+                "forbid": []
+            }
+        ],
+        "jsx-a11y/click-events-have-key-events": 1,
+        "jsx-a11y/no-static-element-interactions": 1,
+        "react/destructuring-assignment": 1,
+        "import/prefer-default-export": 1,
+        "implicit-arrow-linebreak": 1,
+        "operator-linebreak": 1,
+        "object-curly-newline": 1,
+        "react/prop-types": 1,
+        "import/no-cycle": 1,
+        "function-paren-newline": 1,
+        "react/no-unused-prop-types": 1,
+        "react/require-default-props": 1,
+        "no-async-promise-executor": 1,
+        "react/jsx-closing-tag-location": 1,
+        "react/prefer-stateless-function": [0, { "ignorePureComponents": true }],
+        "allowSingleLineBlocks": [0, {"allowSingleLineBlocks": 2}]
+    },
+    "settings": {
+        "import/extensions": [".js", ".jsx", ".ts", ".tsx"],
+        "import/resolver": {
+            "node": {
+                "paths": ["src"]
+            },
+            "alias": {
+                "map": [
+                    [
+                        "#styles",
+                        "./styles"
+                    ],
+                    [
+                        "#widgets",
+                        "./widgets"
+                    ],
+                    [
+                        "#tools",
+                        "./tools"
+                    ],
+                    [
+                        "#store",
+                        "./store"
+                    ],
+                    [
+                        "#hooks",
+                        "./hooks"
+                    ],
+                    [
+                        "#locale",
+                        "./locale"
+                    ],
+                    [
+                        "#collections",
+                        "./collections"
+                    ],
+                    [
+                        "#pages-components",
+                        "./pages-components"
+                    ],
+                    [
+                        "#assets",
+                        "./assets"
+                    ],
+                    [
+                        "#constants-data",
+                        "./constants-data"
+                    ]
+                ]
+            }
+        }
+    }
+}

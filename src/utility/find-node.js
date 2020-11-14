@@ -9,6 +9,7 @@ const findNode = (parent_folder_id, FOLDERS, REQUESTS) => {
   );
 
   // create child object and push to the stack
+  // eslint-disable-next-line array-callback-return
   selectedFolderByParentId.map((folder) => {
     tmp.push({
       folders: findNode(folder.id, FOLDERS, REQUESTS),

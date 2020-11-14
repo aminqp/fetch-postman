@@ -28,6 +28,7 @@ const createCollectionTreeV2 = async (
   treeMap, destPath, requestGroupTemplate, indexTemplate) => {
   try {
     if (Array.isArray(treeMap)) {
+      // eslint-disable-next-line consistent-return
       treeMap.map(async (node) => {
         try {
           const paramCaseName = paramCase(node.name);

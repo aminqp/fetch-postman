@@ -1,28 +1,75 @@
 {
-  "name": "@qp/fetch-postman",
+  "name": "fetch-postman",
   "version": "0.0.1",
   "private": false,
-  "main": "./start.js",
-  "module": "./start.js",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
   "description": "Collect All Apis from Postman ",
   "author": "QP Team",
   "license": "MIT",
   "homepage": "https://github.com/aminqp/fetch-postman#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/aminqp/fetch-postman.git"
+    "url": "git://github.com:aminqp/fetch-postman.git"
   },
   "bugs": {
     "url": "https://github.com/aminqp/fetch-postman/issues"
   },
   "keywords": [
-    "qp","postman","fetch-postman","get postman"
+    "qp",
+    "postman",
+    "fetch-postman",
+    "get postman"
   ],
-
   "dependencies": {
     "rimraf": "^3.0.2",
     "change-case": "^4.1.1",
     "handlebars": "^4.7.6",
     "axios": "^0.19.2"
+  },
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb": "^18.1.0",
+    "eslint-config-react-app": "^5.2.1",
+    "eslint-import-resolver-alias": "^1.1.2",
+    "eslint-import-resolver-node": "^0.3.3",
+    "eslint-import-resolver-webpack": "^0.12.1",
+    "eslint-loader": "3.0.3",
+    "eslint-plugin-flowtype": "4.6.0",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-jsx-a11y": "6.2.3",
+    "eslint-plugin-prettier": "^3.1.2",
+    "eslint-plugin-react": "7.19.0",
+    "eslint-plugin-react-hooks": "^3.0.0",
+    "eslint-plugin-simple-import-sort": "^5.0.2",
+    "eslint-plugin-sort-imports-es6-autofix": "^0.5.0",
+    "eslint-plugin-sort-keys-fix": "^1.1.0",
+    "eslint-watch": "^6.0.1",
+    "babel-eslint": "10.1.0",
+    "@babel/cli": "^7.7.0",
+    "@babel/core": "^7.7.2",
+    "@babel/preset-env": "^7.7.4",
+    "@babel/preset-react": "^7.7.1",
+    "@rollup/plugin-commonjs": "^11.0.1",
+    "@rollup/plugin-node-resolve": "^7.0.0",
+    "pre-commit": "^1.2.2",
+    "rollup": "^1.27.5",
+    "rollup-plugin-babel": "^4.3.3"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "pre-commit": [
+    "lint"
+  ],
+  "scripts": {
+    "clean": "rimraf dist",
+    "clean-all": "rimraf dist node_modules yarn.lock package-lock.json",
+    "prerefresh": "npm run clean-all",
+    "refresh": "npm i",
+    "prebuild": "npm run clean && npm run lint",
+    "build": "rollup -c",
+    "prepublishOnly": "npm run build",
+    "lint": "eslint --fix --config .eslintrc './src/**/*.js'"
   }
 }

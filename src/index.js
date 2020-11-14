@@ -52,13 +52,13 @@ const start = async (postmanData) => {
     isV1 = !!postmanData.folders;
     // open template files and store in globals
     requestTemplateString = await openFile(
-      '/postman/templates/request-template.hbs'
+      './templates/request-template.hbs'
     );
     indexTemplateString = await openFile(
-      '/postman/templates/index-template.hbs'
+      './templates/index-template.hbs'
     );
     requestGroupTemplateString = await openFile(
-      '/postman/templates/request-group-template.hbs'
+      './templates/request-group-template.hbs'
     );
 
     // make template

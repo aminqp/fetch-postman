@@ -15,7 +15,6 @@ const makeRequest = (requestObject) => {
         && requestObject.request.url.variable.reduce((acc, item) => [...acc, item.key],
           []);
 
-
   let { url } = requestObject.request;
   if (typeof (requestObject.request.url) !== 'string') {
     url = requestObject.request.url.raw;
@@ -23,7 +22,6 @@ const makeRequest = (requestObject) => {
 
   const query_url = replaceQueryStrings(queryParams, url.replace(SERVER_URL, '').replace(API_VERSION_KEY, API_VERSION_VALUE));
   const method = requestObject.request.method.toLowerCase();
-
 
   return {
     HTTP_INSTANCE,

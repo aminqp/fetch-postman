@@ -4,7 +4,6 @@ const {
   createCollectionTree
 } = require('./utility');
 
-
 const getPostmanV1 = async ({
   postmanData,
   requestTemplate,

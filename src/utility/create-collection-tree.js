@@ -41,5 +41,4 @@ const createCollectionTree = async (treeMap, destPath, requestGroupTemplate, ind
   });
 };
 
-
 module.exports = createCollectionTree;
