@@ -39,3 +39,5 @@ yarn-error.log*
 /.log*
 /postman_local.json
 /postman/node_modules/
+/dist/
+/package-lock.json
