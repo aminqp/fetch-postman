@@ -1,0 +1,28 @@
+{
+  "name": "@qp/fetch-postman",
+  "version": "0.0.1",
+  "private": false,
+  "main": "./start.js",
+  "module": "./start.js",
+  "description": "Collect All Apis from Postman ",
+  "author": "QP Team",
+  "license": "MIT",
+  "homepage": "https://github.com/aminqp/fetch-postman#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aminqp/fetch-postman.git"
+  },
+  "bugs": {
+    "url": "https://github.com/aminqp/fetch-postman/issues"
+  },
+  "keywords": [
+    "qp","postman","fetch-postman","get postman"
+  ],
+
+  "dependencies": {
+    "rimraf": "^3.0.2",
+    "change-case": "^4.1.1",
+    "handlebars": "^4.7.6",
+    "axios": "^0.19.2"
+  }
+}
