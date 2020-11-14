@@ -1,6 +1,7 @@
 import commonJs from '@rollup/plugin-commonjs';
 import nodeResolve from '@rollup/plugin-node-resolve';
 import babelPlugin from 'rollup-plugin-babel';
+import uglify from 'rollup-plugin-uglify';
 
 import pkg from './package.json';
 
@@ -24,6 +25,7 @@ export default {
     commonJs({
       include: 'node_modules/**'
     }),
+    uglify.uglify(),
     nodeResolve({
       mainFields: ['index']
     })
