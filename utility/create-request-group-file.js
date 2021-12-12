@@ -5,7 +5,8 @@ const makeRequestV1 = require('./make-request');
 const { HTTP_INSTANCE_IMPORT, HTTP_INSTANCE_DIR_NAME, IS_HTTP_INSTANCE_RELATIVE } = require('../constans');
 
 const createRequestGroupFile = async (
-  pathDire, fileName, requests, requestGroupTemplate, isV2 = false) => {
+  pathDire, fileName, requests, requestGroupTemplate, isV2 = false
+) => {
   let requestForTemplate = null;
 
   const newPath = path.relative(pathDire, 'src');
@@ -22,8 +23,8 @@ const createRequestGroupFile = async (
     headerImporter = HTTP_INSTANCE_IMPORT.replace(/\[path\]/, `${newPath}/${HTTP_INSTANCE_DIR_NAME}`);
   }
 
-  const contents = requestGroupTemplate({
-    HTTP_INSTANCE_IMPORT: headerImporter,
+  const contents = await requestGroupTemplate({
+    HTTP_INSTANCE_IMPORT: 'headerImporter',
     requests: requestForTemplate
   });
 

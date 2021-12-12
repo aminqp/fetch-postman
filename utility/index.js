@@ -12,9 +12,11 @@ const createRequestGroupFile = require('./create-request-group-file');
 const addIndexFile = require('./add-index-file');
 const createCollectionTree = require('./create-collection-tree');
 const createCollectionTreeV2 = require('./create-collection-tree-v2');
+const argsParser = require('./arguments-parser');
 
 module.exports = {
   addIndexFile,
+  argsParser,
   createCollectionTree,
   createCollectionTreeV2,
   createDirectory,

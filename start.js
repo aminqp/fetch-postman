@@ -1,5 +1,6 @@
 const { camelCase } = require('change-case');
 const handlebars = require('handlebars');
+const path = require('path');
 const {
   loadPostman,
   saveNewPostmanData,
@@ -11,7 +12,11 @@ const {
 const getPostmanV1 = require('./get_postman_v1');
 const getPostmanV2 = require('./get_postman_v2');
 
-const { POSTMAN_LOCAL_PATH, PACKAGE_JSON_PATH } = require('./constans');
+const {
+  POSTMAN_LOCAL_PATH,
+  OUT_PUT,
+  REPOSITORY_URL
+} = require('./constans');
 
 // define global variables
 let requestTemplateString;
@@ -20,7 +25,6 @@ let requestGroupTemplateString;
 let requestTemplate;
 let indexTemplate;
 let requestGroupTemplate;
-let POSTMAN_LOCAL;
 let isV1 = false;
 
 // define handlebars helper function
@@ -33,23 +37,15 @@ handlebars.registerHelper('ifEquals', function (a, b, opts) {
 
 handlebars.registerHelper('camelCase', (name) => camelCase(name));
 
-// open local postman async
-try {
-  POSTMAN_LOCAL = JSON.parse(openFile(POSTMAN_LOCAL_PATH));
-} catch (e) {
-  POSTMAN_LOCAL = null;
-}
-
 // open package.json file
-const PACKAGE_JSON = JSON.parse(openFile(PACKAGE_JSON_PATH));
+// const PACKAGE_JSON = JSON.parse(openFile(PACKAGE_JSON_PATH));
 
 // get config from package.json -> postman
-const postmanRepositoryUrl = PACKAGE_JSON.postman.repository_url;
-const outputPath = PACKAGE_JSON.postman.target;
+// const outputPath = PACKAGE_JSON.postman.target;
 
 const start = async (postmanData) => {
   try {
-    isV1 = !!postmanData.folders;
+    isV1 = !!postmanData?.folders;
     // open template files and store in globals
     requestTemplateString = await openFile(
       '/generate-postman/templates/request-template.hbs'
@@ -62,15 +58,15 @@ const start = async (postmanData) => {
     );
 
     // make template
-    requestTemplate = handlebars.compile(requestTemplateString);
-    indexTemplate = handlebars.compile(indexTemplateString);
-    requestGroupTemplate = handlebars.compile(requestGroupTemplateString);
+    requestTemplate = await handlebars.compile(requestTemplateString);
+    indexTemplate = await handlebars.compile(indexTemplateString);
+    requestGroupTemplate = await handlebars.compile(requestGroupTemplateString);
 
     // cleaning old repository if exist
-    await deleteOldRepoDirectory(outputPath);
+    await deleteOldRepoDirectory(OUT_PUT);
 
     // create new root directory for repository folder
-    await createDirectory(outputPath);
+    await createDirectory(OUT_PUT);
 
     if (isV1) {
       console.log('####################################');
@@ -81,7 +77,7 @@ const start = async (postmanData) => {
 
       await getPostmanV1({
         indexTemplate,
-        outputPath,
+        outputPath: OUT_PUT,
         postmanData,
         requestGroupTemplate,
         requestTemplate
@@ -95,7 +91,7 @@ const start = async (postmanData) => {
 
       await getPostmanV2({
         indexTemplate,
-        outputPath,
+        outputPath: OUT_PUT,
         postmanData: postmanData.item,
         requestGroupTemplate,
         requestTemplate
@@ -106,7 +102,7 @@ const start = async (postmanData) => {
   }
 };
 
-loadPostman(postmanRepositoryUrl)
+loadPostman(REPOSITORY_URL)
   .then((newPostmanData) => {
     // start after response
     start(newPostmanData);
@@ -115,8 +111,14 @@ loadPostman(postmanRepositoryUrl)
   .catch((e) => {
     console.log('\n\n ##-> start => get postman failed');
     console.log('##-> start => e -> ', e);
-    if (POSTMAN_LOCAL) {
-      console.log('\n\n ##-> start postman from local');
-      start(POSTMAN_LOCAL);
+    console.log('\n\n ##-> start postman from local');
+    // open local postman async
+    try {
+      openFile(POSTMAN_LOCAL_PATH)
+        .then((data) => {
+          start(JSON.parse(data));
+        });
+    } catch (err) {
+      console.log('##-> start postman from local was error => e -> ', err);
     }
   });
